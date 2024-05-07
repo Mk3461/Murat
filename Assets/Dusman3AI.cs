@@ -1,49 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
-public class Dusman2AI : MonoBehaviour
+public class Dusman3AI : MonoBehaviour
 {
-
     public Vector2 pos1;
     public Vector2 pos2;
     public float leftrightspeed;
-    private float oldPosition;
+    public float oldPosition;
     public Transform firepoint;
     public float distance;
-    private float attackRange = 1.5f;
+    public float attackRange;
 
     private Transform targetPos;
-    public LayerMask playerLayer;
-    public float followspeed;
-
+    public LayerMask PlayerLayer;
+    public float followSpeed;
     private Animator animator;
-    private bool canMove = true; 
+
+
+
     void Start()
     {
         Physics2D.queriesStartInColliders = false;
-
-        targetPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();//tag'i player olan nesneyi takip etmeyi saðlar.
         animator = GetComponent<Animator>();
-
     }
 
-
+    // Update is called once per frame
     void Update()
     {
-        if (canMove)
-        {
-            Flip();
-            EnemyAi();
-        }
+        Flip();
+        EnemyAi();
     }
     void EnemyMove()
     {
 
 
-        transform.position = Vector3.Lerp(pos1, pos2, Mathf.PingPong(Time.time * leftrightspeed, 1.0f));//lerp iki nokta arasý hesaplama sunuyor bizlere ayrýca 3.parametre bizim hýz hespalamasý yapmamýzý saðlýyor
+        transform.position = Vector3.Lerp(pos1, pos2, Mathf.PingPong(Time.time * leftrightspeed, 1.0f));
 
-        if (transform.position.x > oldPosition)//burada ise düþmanýn yüzünü nereye dönüp hareket edeceðini anlamamýzý saðlýyor
+        if (transform.position.x > oldPosition)
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
@@ -61,19 +56,13 @@ public class Dusman2AI : MonoBehaviour
         if (hitEnemy.collider != null)//bir obje çarptý demek oluyor sanal çubuða.
         {
             Debug.DrawLine(transform.position, hitEnemy.point, Color.red);
-            canMove = false; 
-            EnemyFollow();
-            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(firepoint.position, attackRange, playerLayer);
-            foreach (var player in hitPlayer)
-            {
-                animator.SetBool("Attack", true);
-            }
+            animator.SetBool("Attack", true);
+            
         }
         else
         {
             Debug.DrawLine(transform.position, transform.position - transform.right * distance, Color.green);
             animator.SetBool("Attack", false);
-            canMove = true;
             EnemyMove();
         }
     }
@@ -85,12 +74,5 @@ public class Dusman2AI : MonoBehaviour
         }
 
     }
-
-
-    void EnemyFollow()//karakteri takip edecek metottur.player tag'e sahip nesnenin konumunu bulmayý saðlar.
-    {
-        Vector3 targetPosition = new Vector3(targetPos.position.x, gameObject.transform.position.y, targetPos.position.x);
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, followspeed * Time.deltaTime);
-    }
-
+    
 }

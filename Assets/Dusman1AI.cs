@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Dusman1AI : MonoBehaviour
@@ -18,6 +19,7 @@ public class Dusman1AI : MonoBehaviour
     public float followspeed;
 
     private Animator animator;
+    private bool canMove = true; // Yeni durum deðiþkeni
     void Start()
     {
         Physics2D.queriesStartInColliders = false;
@@ -30,8 +32,11 @@ public class Dusman1AI : MonoBehaviour
    
     void Update()
     {
-        Flip();
-        EnemyAi();
+        if (canMove)
+        { // Sadece canMove true ise hareket et
+            Flip();
+            EnemyAi();
+        }
     }
     void EnemyMove()
     {
@@ -57,6 +62,7 @@ public class Dusman1AI : MonoBehaviour
         if(hitEnemy.collider != null)//bir obje çarptý demek oluyor sanal çubuða.
         {
             Debug.DrawLine(transform.position,hitEnemy.point,Color.red);
+            canMove = false; // Saldýrý modunda hareket etme
             EnemyFollow();
             Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(firepoint.position,attackRange, playerLayer);
             foreach(var player in hitPlayer)
@@ -68,6 +74,7 @@ public class Dusman1AI : MonoBehaviour
         {
             Debug.DrawLine(transform.position, transform.position - transform.right * distance, Color.green);
             animator.SetBool("Attack", false);
+            canMove = true; // Hareket modu
             EnemyMove();
         }
     }
@@ -85,6 +92,5 @@ public class Dusman1AI : MonoBehaviour
         Vector3 targetPosition=new Vector3(targetPos.position.x,gameObject.transform.position.y,targetPos.position.x);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, followspeed * Time.deltaTime);
     }
-
-}
     
+}

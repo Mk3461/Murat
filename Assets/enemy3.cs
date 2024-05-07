@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class enemy3 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Animator animator;
+    public int maxHealth = 50;
+    int currentHealth;
+    Dusman3AI enemy3ai;
+
     void Start()
     {
-        
+        currentHealth = maxHealth;
+        enemy3ai = GetComponent<Dusman3AI>();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
+        currentHealth -= damage;
+        animator.SetTrigger("Hurt");
         
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        enemy3ai.leftrightspeed = 0;
+        Debug.Log("Enemy Died!");
+        animator.SetBool("IsDead", true);
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject, 2f);
+        enemy3ai.followSpeed = 0;
+        this.enabled = false;
     }
 }
