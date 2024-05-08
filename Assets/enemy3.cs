@@ -31,7 +31,6 @@ public class enemy3 : MonoBehaviour
         animator.SetBool("IsDead", true);
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 2f);
-        enemy3ai.followSpeed = 0;
         this.enabled = false;
     }
 }
