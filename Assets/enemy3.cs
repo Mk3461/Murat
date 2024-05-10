@@ -17,7 +17,7 @@ public class enemy3 : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        animator.SetTrigger("Hurt");
+        animator.SetBool("Hurt",true);
         
         if (currentHealth <= 0)
         {

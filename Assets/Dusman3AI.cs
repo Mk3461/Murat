@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UIElements;
 
 public class Dusman3AI : MonoBehaviour
@@ -16,13 +17,17 @@ public class Dusman3AI : MonoBehaviour
     public GameObject arrowPrefab;
     public Transform firePoint;
 
-    public float attackInterval = 10; // Ok atýþ aralýðý
+    public float attackInterval = 2f; // Ok atýþ aralýðý
     private float lastAttackTime;
 
     private Transform targetPos; // Oyuncunun konumu
     private Animator animator;
     private bool canMove = true;
+    private bool canAttack=false;
 
+
+
+    
     void Start()
     {
         Physics2D.queriesStartInColliders = false;
@@ -30,14 +35,21 @@ public class Dusman3AI : MonoBehaviour
         targetPos = GameObject.FindGameObjectWithTag("Player").transform; // Oyuncunun konumu
     }
 
+
+
     void Update()
     {
         if (canMove)
         {
             Flip();
+            CanAttack();
             EnemyAi();
+
         }
+        
     }
+
+    
 
     void EnemyMove()
     {
@@ -57,54 +69,67 @@ public class Dusman3AI : MonoBehaviour
 
     void EnemyAi()
     {
-        // Raycast ile oyuncuyu algýlayýn
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.right, distance, playerLayer);
+    attack:
 
-        if (hit.collider != null && Time.time >= lastAttackTime + attackInterval) // Saldýrý aralýðýna göre kontrol
+        if (canAttack)
         {
+            //Time.time >=lastAttackTime+attackInterval
+            Debug.Log("Eralp");
             EnemyAttack();
             canMove = false;
-            lastAttackTime = Time.time; // Saldýrý zamanýný güncelleyin
+            lastAttackTime = Time.time;
+            goto attack;
         }
         else
         {
-            animator.SetBool("Attack", false);
+            Debug.Log("Mustafa");
             canMove = true;
-            EnemyMove(); // Oyuncu yoksa normal hareket
+            EnemyMove();
+            animator.SetBool("Attack", false);
         }
     }
-
+    
+    void CanAttack()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.right, distance, playerLayer);
+        
+        if (hit.collider != null)
+        {
+            Debug.Log("Özgür");
+            canAttack = true;
+        }// Saldýrý aralýðýna göre kontrol
+        else
+        {
+            Debug.Log("Nuri");
+            canAttack = false;
+        }
+    }
+    
+  
     void Flip()
     {
-        // Opsiyonel: Düþmanýn yön deðiþtirmesi için animasyon kontrolü
+        if (animator.GetBool("Attack") == false)
+        {
+            if (animator.GetBool("Hurt") == true)
+            {
+                transform.Rotate(0f, 180f, 0f);
+            }
+        }
     }
 
     void EnemyAttack()
     {
+        
         // Animasyonu tetikleyin ve oku fýrlatýn
         firePoint.localScale = new Vector3(-1, 1, 1);
-        animator.SetBool("Attack",true);
-
-
+        animator.SetBool("Attack", true);
+      
 
     }
-    void Eralp()
-    {
-        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
-    }
-    void AttackFree()
-    {
-        if (animator.GetBool("Attack"))
+       void ArrowShot()
         {
-            animator.SetBool("Attack", false);
-            StartCoroutine(counter());
-
+            GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);//okun çýkýþ animasyonuna koymak için
         }
 
-
-    } 
-    IEnumerator counter()
-    {
-        yield return new WaitForSeconds(2);
-    }
 }
+
