@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1885841957697776669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7112547682219950014}
+  m_Layer: 3
+  m_Name: PlayerP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7112547682219950014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885841957697776669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.346, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4287882799838736108}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934694020188285177
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,6 +102,7 @@ Transform:
   - {fileID: 4974787951137838748}
   - {fileID: 4445941526437288799}
   - {fileID: 6498965047018551164}
+  - {fileID: 7112547682219950014}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7456536414616969533
@@ -286,6 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8052735834212319689}
   animator: {fileID: 4624259707282180791}
+  playerPos: {fileID: 7112547682219950014}
   runSpeed: 25
 --- !u!95 &4624259707282180791
 Animator:

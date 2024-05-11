@@ -209,18 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c798268723061af4897b8225647dc6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos1: {x: 3.35, y: -0.76}
-  pos2: {x: -4, y: -0.76}
-  leftrightspeed: 0.2
-  oldPosition: 0
-  distance: 10
-  attackRange: 10
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  arrowPrefab: {fileID: 6563562714270983951, guid: d71afcb9c4e92234d85f35a4c64311ac, type: 3}
-  firePoint: {fileID: 6270678456276727614}
-  attackInterval: 5
+  arrowPrefab: {fileID: 5402344590312765987, guid: d71afcb9c4e92234d85f35a4c64311ac, type: 3}
+  arrowPos: {fileID: 6270678456276727614}
+  PlayerPos: {fileID: 0}
 --- !u!1 &853822242435474034
 GameObject:
   m_ObjectHideFlags: 0
