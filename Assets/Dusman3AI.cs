@@ -20,11 +20,6 @@ public class Dusman3AI : MonoBehaviour
     void Start()
     {
         animator= GetComponent<Animator>();
-        
-        
-   
-
-
     }
 
 
@@ -56,7 +51,5 @@ public class Dusman3AI : MonoBehaviour
         {
             Instantiate(arrowPrefab,arrowPos.position,arrowPos.rotation);//okun çýkýþ animasyonuna koymak için
         }
-   
-
 }
 

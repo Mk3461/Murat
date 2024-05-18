@@ -7,7 +7,7 @@ public class enemy1 : MonoBehaviour
     public Animator animator;
 
     public int maxHealth = 100;
-    int currentHealth;
+    public int currentHealth;
 
     Dusman1AI enemy1ai;
 

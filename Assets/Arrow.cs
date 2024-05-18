@@ -7,7 +7,7 @@ public class Arrow : MonoBehaviour
     //public float speed=20f;
     
     public Rigidbody2D rb;
-    public float force=10f;
+    public float force=5f;
     private float timer;
     private PlayerMovement playerMovement;
     void Start()
@@ -21,20 +21,13 @@ public class Arrow : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rot);
         
     }
-        
-    
+
+
     void Update()
     {
-        
+
         timer += Time.deltaTime;
-        if (timer > 10)
-        {
-            Destroy(gameObject);
-        }
-    }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
+        if (timer > 7)
         {
             Destroy(gameObject);
         }

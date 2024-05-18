@@ -64,7 +64,7 @@ public class PlayerCombat : MonoBehaviour
                 }
                 else if(enemy.name == "Enemy4")
                 {
-                 //   enemy.GetComponent<enemy4>().TakeDamage(attackDamage);
+                   enemy.GetComponent<enemy4>().TakeDamage(attackDamage);
                 }
             }
         }
