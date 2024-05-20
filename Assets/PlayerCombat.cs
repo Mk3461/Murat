@@ -66,6 +66,18 @@ public class PlayerCombat : MonoBehaviour
                 {
                    enemy.GetComponent<enemy4>().TakeDamage(attackDamage);
                 }
+                else if (enemy.name == "FireBall")
+                {
+                    enemy.GetComponent<FireBall>().TakeDamage(attackDamage);
+                }
+                else if(enemy.name== "Enemy5")
+                {
+                    enemy.GetComponent<enemy5>().TakeDamage(attackDamage);
+                }
+                else if (enemy.name == "FireBall(Clone)")
+                {
+                    enemy.GetComponent<FireBall>().TakeDamage(attackDamage);
+                }
             }
         }
     }

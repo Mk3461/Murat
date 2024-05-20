@@ -7,7 +7,7 @@ public class Dusman4AI : MonoBehaviour
 {
     enemy1 H1;
     enemy3 H3;
-    // enemy5 H5;
+    enemy5 H5;
     public Animator animator;
    //private Transform EnemyPos;
     public  float leftrightspeed=0.5f;
@@ -37,7 +37,7 @@ public class Dusman4AI : MonoBehaviour
 
         H1 = GetComponent<enemy1>();
         H3 = GetComponent<enemy3>();
-        // H5 = GetComponent<enemy5>();
+        H5 = GetComponent<enemy5>();
      
     }
 
@@ -82,6 +82,7 @@ public class Dusman4AI : MonoBehaviour
             {
                 enemy1 enemyH1 = enemys.GetComponent<enemy1>();
                 enemy3 enemyH3 = enemys.GetComponent<enemy3>();
+                enemy5 enemyH5 = enemys.GetComponent<enemy5>();
                 // H5 i eklemeyi unutma
                 if (enemyH1 != null)  
                     {
@@ -102,12 +103,12 @@ public class Dusman4AI : MonoBehaviour
                        
                   
                     }
-                  //  else if (enemyH5 != null)
-                  //  {
-                        //H5=enemyH5;    
-                        // Heal3();
-                        // leftrightspeed = 0;
-                    //}
+                  else if (enemyH5 != null)
+                    { 
+                       H5=enemyH5;
+                       Heal3();
+                       leftrightspeed = 0;
+                  }
 
                 }
             }
@@ -133,11 +134,11 @@ public class Dusman4AI : MonoBehaviour
     }
     void Heal2()
     {
-        
+
         timer2 += Time.deltaTime;
         if (timer2 >= 5)
         {
-            
+
             if (H3.currentHealth > 0 && H3.currentHealth < H3.maxHealth)
             {
 
@@ -147,7 +148,7 @@ public class Dusman4AI : MonoBehaviour
                 timer2 = 0;
             }
         }
-        /*  
+    }
           void Heal3()
           {
               timer3 += Time.deltaTime;
@@ -162,8 +163,8 @@ public class Dusman4AI : MonoBehaviour
                   }
               }
           }
-        */
-    }
+        
+    
 }
 
 
